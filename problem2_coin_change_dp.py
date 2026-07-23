@@ -3,7 +3,7 @@
 # Dynamic Programming Based on the Coin Change Problem
 # ============================================================
 
-# Returns the minimum number of coins required & selected coins combination
+# Returns the minimum number of coins required & the selected coins combination
 def coin_change(coins, amount):
     # Assign an infinite value to represent an unreachable solution
     INF = float('inf')
@@ -31,10 +31,11 @@ def coin_change(coins, amount):
     if dp[amount] == INF:
         return None, None
 
-    # ==Reconstruct selected coins==
+    # ==Reconstruct Selected Coins==
     result_coins = []
     current = amount
 
+    # Trace back from the target amount to reconstruct the selected coin combination
     while current > 0:
         coin = selected_coin[current]
 
@@ -47,32 +48,58 @@ def coin_change(coins, amount):
     return dp[amount], result_coins
 
 def display_result(amount, coins, minimum_coins, selected_coins):
-    print("\n============= Cash Change Result =============")
-    print(f"Target Change Amount: RM{amount}")
-    print(f"Available Coin Denominations: {coins}")
+    print("\n================= Cash Change Result =================")
+    print("Input Summary")
+    print("------------------------------------------------------")
+    print(f"Target Change Amount         : RM{amount}")
+    print("Available Coin Denominations : ", end="")
+
+    for i in range(len(coins)):
+        print(f"RM{coins[i]}", end="")
+
+        if i != len(coins) - 1:
+            print(", ", end="")
+
+    print()
 
     if minimum_coins is None:
         print("No possible combination can form this amount.")
 
     else:
-        print(f"\nMinimum Number of Coins: {minimum_coins}")
-        print("Coins Used:")
-        print(" + ".join(
-            [f"RM{coin}" for coin in selected_coins]
-        ))
+        print("\nResult")
+        print("------------------------------------------------------")
+        print(f"Minimum Number of Coins : {minimum_coins}")
 
-    print("==============================================")
+        coins_used = " + ".join([f"RM{coin}" for coin in selected_coins])
+        print(f"Coins Used              : {coins_used}")
+
+        print("\nCoin Breakdown")
+        print("------------------------------------------------------")
+
+        # Count the number of each coin denomination used
+        breakdown = {}
+
+        for coin in selected_coins:
+            if coin in breakdown:
+                breakdown[coin] += 1
+
+            else:
+                breakdown[coin] = 1
+
+        for coin in breakdown:
+            print(f"RM{coin} x {breakdown[coin]}")
+
+    print("======================================================")
 
 def main():
     while True:
-        print("==============================================")
-        print(" Cash Change Distribution System ")
-        print(" Dynamic Programming - Coin Change Problem")
-        print("==============================================")
+        print("======================================================")
+        print("           Cash Change Distribution System ")
+        print("      Dynamic Programming - Coin Change Problem")
+        print("======================================================")
 
         # ==User Input Section==
         coins_input = input("Enter available coin denominations (separated by space): ")
-
         coins = []
 
         try:
@@ -114,14 +141,20 @@ def main():
         # Display Output
         display_result(amount, coins, minimum_coins, selected_coins)
 
-        run_again = input("Do you want to run the program again? (y/n): ")
+        while True:
+            run_again = input("Do you want to run the program again? (y/n): ").lower()
 
-        if run_again.lower() != 'y':
-            print("Thank you for using the Cash Change Distribution System. Goodbye!")
-            break
+            if run_again == "y":
+                break
+
+            elif run_again == "n":
+                print("Thank you for using the Cash Change Distribution System. Goodbye!")
+                return
+
+            else:
+                print("Invalid input. Please enter 'y' or 'n'.")
 
         print()
 
-# Program execution
 if __name__ == "__main__":
     main()
