@@ -51,11 +51,11 @@ def display_result(amount, coins, minimum_coins, selected_coins):
     print("\n================= Cash Change Result =================")
     print("Input Summary")
     print("------------------------------------------------------")
-    print(f"Target Change Amount         : RM{amount}")
+    print(f"Target Change Amount         : {amount} sen")
     print("Available Coin Denominations : ", end="")
 
     for i in range(len(coins)):
-        print(f"RM{coins[i]}", end="")
+        print(f"{coins[i]} sen", end="")
 
         if i != len(coins) - 1:
             print(", ", end="")
@@ -70,7 +70,7 @@ def display_result(amount, coins, minimum_coins, selected_coins):
         print("------------------------------------------------------")
         print(f"Minimum Number of Coins : {minimum_coins}")
 
-        coins_used = " + ".join([f"RM{coin}" for coin in selected_coins])
+        coins_used = " + ".join([f"{coin} sen" for coin in selected_coins])
         print(f"Coins Used              : {coins_used}")
 
         print("\nCoin Breakdown")
@@ -87,7 +87,7 @@ def display_result(amount, coins, minimum_coins, selected_coins):
                 breakdown[coin] = 1
 
         for coin in breakdown:
-            print(f"RM{coin} x {breakdown[coin]}")
+            print(f"{coin} sen x {breakdown[coin]}")
 
     print("======================================================")
 
@@ -99,7 +99,7 @@ def main():
         print("======================================================")
 
         # ==User Input Section==
-        coins_input = input("Enter available coin denominations (separated by space): ")
+        coins_input = input("Enter available coin denominations in sen (separated by space): ")
         coins = []
 
         try:
@@ -124,7 +124,7 @@ def main():
             continue
 
         try:
-            amount = int(input("Enter required change amount: "))
+            amount = int(input("Enter required change amount in sen: "))
 
             if amount <= 0:
                 print("Amount must be positive.")
