@@ -1,6 +1,6 @@
 # ============================================================
-# Problem 1: Solving Dijkstra’s Shortest Path Algorithm Using
-# Greedy Algorithm
+# Problem 1: Greedy Algorithm
+# Dijkstra’s Shortest Path Algorithm
 # ============================================================
 
 INF = float('inf')
