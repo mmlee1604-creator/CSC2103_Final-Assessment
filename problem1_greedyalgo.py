@@ -3,13 +3,6 @@
 # Greedy Algorithm
 # ============================================================
 
-"""Greedy Algorithm: Dijkstra's Shortest Path
-
-Dijkstra's algorithm is a greedy algorithm that finds the shortest path from a 
-source vertex to all other vertices in a weighted graph with non-negative edge weights. 
-This implementation allows users to input a graph, specify whether it is directed or 
-undirected, and then compute the shortest paths from a chosen source vertex.
-"""
 INF = float('inf')
 
 # input helpers
