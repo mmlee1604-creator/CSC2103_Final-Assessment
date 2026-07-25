@@ -2,8 +2,10 @@
 # Problem 3: Heuristic Algorithm
 # A* Search for Path Finding
 # ============================================================
+# All algorithmic logic (priority selection, heuristic evaluation,
+# path reconstruction) is implemented manually without library
+# algorithm solvers.
 
-import heapq  # Priority queue — used for input/output only, not core algorithm
 
 # Calculate Manhattan Distance from cell a to cell b
 # Used as the heuristic estimate (h) in A*
@@ -17,9 +19,10 @@ def astar(grid, start, goal):
     rows = len(grid)
     cols = len(grid[0])
 
-    # Priority queue: stores (f_score, cell)
-    open_set = []
-    heapq.heappush(open_set, (0, start))
+    # Open set: list of cells discovered but not yet processed.
+    # The cell with the lowest f_score is selected manually each
+    # iteration (linear scan) — no library priority queue is used.
+    open_set = [start]
 
     came_from = {}               # Tracks which cell each cell was reached from
     g_score = {start: 0}        # Actual steps taken from start to each cell
@@ -27,8 +30,13 @@ def astar(grid, start, goal):
     closed_set = set()           # Cells already fully processed
 
     while open_set:
-        # Get the cell with lowest f_score
-        _, current = heapq.heappop(open_set)
+        # Manual greedy selection: find the open cell with the
+        # lowest f_score. This replaces a heap-based priority queue.
+        best_index = 0
+        for i in range(1, len(open_set)):
+            if f_score[open_set[i]] < f_score[open_set[best_index]]:
+                best_index = i
+        current = open_set.pop(best_index)
 
         # Skip if already processed
         if current in closed_set:
@@ -65,7 +73,8 @@ def astar(grid, start, goal):
                 came_from[neighbour] = current
                 g_score[neighbour] = tentative_g
                 f_score[neighbour] = tentative_g + heuristic(neighbour, goal)
-                heapq.heappush(open_set, (f_score[neighbour], neighbour))
+                if neighbour not in open_set:
+                    open_set.append(neighbour)
 
     return None, closed_set  # No path found
 
@@ -166,8 +175,8 @@ def print_path_table(path):
     print()
 
 
-# Main program — runs the full A* search flow
-def main():
+# Run one complete A* search: input -> search -> results
+def run_search():
     grid, rows, cols = get_grid_input()
 
     print("\nSet Start and Goal positions (must be open cells — value 0):")
@@ -199,12 +208,6 @@ def main():
         print(f"  {'g(n) - actual cost to goal':<35}: {len(path)-1}")
         print(f"  {'h(n) - heuristic at start (Manhattan)':<35}: {heuristic(start, goal)}")
         print(f"  {'f(n) = g(n) + h(n)':<35}: {len(path)-1 + heuristic(start, goal)}")
-        print()
-        print("  NOTE: A* uses heuristic (Manhattan distance) to guide")
-        print("  the search. It is NOT guaranteed to be optimal if the")
-        print("  heuristic overestimates (inadmissible). Here, Manhattan")
-        print("  distance is admissible for 4-directional grids, so the")
-        print("  result IS optimal for this configuration.")
     else:
         print(f"\n  No path found from {start} to {goal}.")
         print(f"  Cells explored before giving up: {len(explored)}")
@@ -212,12 +215,16 @@ def main():
 
     print("\n" + "=" * 55)
 
-    again = input("\nRun another search? (y/n): ").strip().lower()
-    if again == 'y':
+
+# Main program loop — allows repeated searches without recursion
+def main():
+    while True:
+        run_search()
+        again = input("\nRun another search? (y/n): ").strip().lower()
+        if again != 'y':
+            print("\nExiting. Goodbye.")
+            break
         print()
-        main()
-    else:
-        print("\nExiting. Goodbye.")
 
 
 # Run main only when this file is executed directly
