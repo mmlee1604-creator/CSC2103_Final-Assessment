@@ -1,0 +1,30 @@
+Problem 2: Optimise Cash Change Distribution Using Dynamic Programming Based on the Coin Change Problem
+
+================ SAMPLE INPUT ================ 
+
+Enter available coin denominations in sen (separated by space): 5 10 20 50
+Enter required change amount in sen: 585
+
+Do you want to run the program again? (y/n): n
+
+================ SAMPLE OUTPUT ================
+
+
+================= Cash Change Result =================
+Input Summary
+------------------------------------------------------
+Target Change Amount         : 585 sen
+Available Coin Denominations : 5 sen, 10 sen, 20 sen, 50 sen
+
+Result
+------------------------------------------------------
+Minimum Number of Coins : 14
+Coins Used              : 5 sen + 10 sen + 20 sen + 50 sen + 50 sen + 50 sen + 50 sen + 50 sen + 50 sen + 50 sen + 50 sen + 50 sen + 50 sen + 50 sen
+
+Coin Breakdown
+------------------------------------------------------
+5 sen x 1
+10 sen x 1
+20 sen x 1
+50 sen x 11
+======================================================

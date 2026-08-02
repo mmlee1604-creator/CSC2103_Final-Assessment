@@ -1,0 +1,36 @@
+Problem 1: Greedy Algorithm
+Dijkstra's Shortest Path Algorithm 
+
+================ SAMPLE INPUT ================ 
+
+Enter number of vertices: 3
+Name of vertex 1 (leave blank for 'A'): b
+Name of vertex 2 (leave blank for 'B'): c
+Name of vertex 3 (leave blank for 'C'): d
+Is the graph directed? (y/n): y
+Enter number of edges: 3
+
+Edge 1: b c 2
+Edge 2: b d 1
+Edge 3: c d 3
+
+Enter source vertex to run Dijkstra's algorithm from: b
+
+Run again from a different source vertex? (y/n):n
+
+================ SAMPLE OUTPUT ================
+
+
+ Greedy Selection Order (source: b)
+Step  Vertex Settled    Distance from Source  
+----------------------------------------------
+1     b                 0                     
+2     d                 1                     
+3     c                 2                     
+
+=== Shortest Paths from 'b' ===
+Vertex      Distance    Path
+----------------------------------------------
+b           0           b
+c           2           b -> c
+d           1           b -> d

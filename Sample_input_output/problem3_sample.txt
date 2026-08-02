@@ -1,0 +1,61 @@
+Problem 3: Heuristic Algorithm
+A* Search for Path Finding 
+
+================ SAMPLE INPUT ================ 
+
+Enter number of rows (3-15): 5
+Enter number of columns (3-15): 5
+
+  Row 1: 0 0 0 0 0 
+  Row 2: 1 1 0 1 1
+  Row 3: 0 1 0 1 0
+  Row 4: 0 1 0 1 0
+  Row 5: 0 0 0 0 0 
+
+  Start row (0 to 4): 0
+  Start col (0 to 4): 0
+  Goal row (0 to 4): 3
+  Goal col (0 to 4): 0
+
+Run another search? (y/n): n
+
+================ SAMPLE OUTPUT ================
+
+Running A* Search...
+
+Legend: S=Start  G=Goal  #=Wall  *=Path  .=Explored  O=Open
+
+ S  *  *  .  O 
+ #  #  *  #  # 
+ O  #  *  #  O 
+ G  #  *  #  O 
+ *  *  *  O  O 
+
+=======================================================
+                    RESULTS
+=======================================================
+
+  Path FOUND from (0, 0) to (3, 0)
+  Path length : 10 cells  (9 steps)
+  Cells explored by A* : 11
+
+  Path sequence:
+  Step   Row    Col   
+  ------------------
+  0      0      0      (Start)
+  1      0      1      
+  2      0      2      
+  3      1      2      
+  4      2      2      
+  5      3      2      
+  6      4      2      
+  7      4      1      
+  8      4      0      
+  9      3      0      (Goal)
+
+  Cost Summary
+  g(n) - actual cost to goal         : 9
+  h(n) - heuristic at start (Manhattan): 3
+  f(n) = g(n) + h(n)                 : 12
+
+=======================================================
