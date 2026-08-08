@@ -18,6 +18,7 @@ All the programs were developed in Python as console-based applications.
 4. Follow instructions shown in the console and enter the required inputs
 
 # Project Structure
+```
 CSC2103_Final-Assessment/
 ├── problem1_greedyalgo.py
 ├── problem2_coin_change_dp.py
@@ -27,6 +28,7 @@ CSC2103_Final-Assessment/
     ├── problem1_sample.txt
     ├── problem2_sample.txt
     └── problem3_sample.txt
+```
 
 # Problem 1: Dijkstra's Shortest Path Algorithm
 Approach: Greedy Algorithm
